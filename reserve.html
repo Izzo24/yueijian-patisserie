@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>é ç´„è¨‚ä½ â€” ç¥è¦‹æ³•å¼ç”œé»</title>
+  <link rel="icon" type="image/svg+xml" href="logos/yueijian-logo.svg" />
+  <link rel="stylesheet" href="css/design.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Noto+Serif+TC:wght@300;400;500;600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* â”€â”€ Reset & Base â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c-cream:  #FAF6F0;
+      --c-ivory:  #F2EBE0;
+      --c-gold:   #C9A96E;
+      --c-choco:  #2C1810;
+      --c-warm:   #8B6247;
+      --c-light:  #E8DDD3;
+      --c-dark:   #1A0F0A;
+      --c-text:   #3D2B1F;
+      --c-muted:  #7A6355;
+      --ff-serif: 'Cormorant Garamond', 'Noto Serif TC', Georgia, serif;
+      --ff-body:  'Outfit', 'Noto Serif TC', sans-serif;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--ff-body);
+      background: var(--c-cream);
+      color: var(--c-text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* â”€â”€ Nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 2rem;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      background: transparent;
+      transition: background 0.4s var(--ease-out), box-shadow 0.4s;
+    }
+    .site-nav.scrolled {
+      background: var(--c-choco);
+      box-shadow: 0 1px 24px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-logo span {
+      font-family: var(--ff-serif);
+      font-size: 1.2rem;
+      color: #fff;
+      letter-spacing: 0.08em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.4rem;
+      list-style: none;
+    }
+    .nav-link {
+      font-family: var(--ff-body);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.82);
+      transition: color 0.25s;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--c-gold);
+      transition: width 0.3s var(--ease-out);
+    }
+    .nav-link:hover, .nav-link.active { color: #fff; }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-cta {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--c-choco);
+      background: var(--c-gold);
+      padding: 0.5rem 1.4rem;
+      border-radius: 1px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .nav-cta:hover { background: #d4b47e; transform: translateY(-1px); }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: #fff;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* â”€â”€ Reveal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.12s; }
+    .reveal-delay-2 { transition-delay: 0.24s; }
+    .reveal-delay-3 { transition-delay: 0.36s; }
+
+    /* â”€â”€ Typography helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .section-label {
+      font-family: var(--ff-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-gold);
+    }
+    .section-title {
+      font-family: var(--ff-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--c-choco);
+    }
+    .section-title.light { color: #fff; }
+    .section-body {
+      font-size: 0.95rem;
+      color: var(--c-muted);
+      line-height: 1.8;
+    }
+    .gold-rule {
+      width: 48px; height: 1px;
+      background: var(--c-gold);
+      margin: 1rem 0;
+    }
+
+    /* â”€â”€ Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--ff-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--c-choco);
+      padding: 0.85rem 2.2rem;
+      border: 1px solid var(--c-choco);
+      border-radius: 1px;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #3d2010; transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-block;
+      font-family: var(--ff-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-choco);
+      background: transparent;
+      padding: 0.85rem 2.2rem;
+      border: 1px solid var(--c-choco);
+      border-radius: 1px;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+    .btn-outline:hover {
+      background: var(--c-choco);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .btn-gold {
+      display: inline-block;
+      font-family: var(--ff-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-choco);
+      background: var(--c-gold);
+      padding: 0.85rem 2.2rem;
+      border: 1px solid var(--c-gold);
+      border-radius: 1px;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-gold:hover { background: #d4b47e; transform: translateY(-1px); }
+
+    /* â”€â”€ HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .reserve-hero {
+      min-height: 62vh;
+      background: var(--c-choco);
+      display: flex;
+      align-items: flex-end;
+      padding: 0 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .reserve-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 30%, rgba(201,169,110,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse at 10% 80%, rgba(44,24,16,0.6) 0%, transparent 50%);
+    }
+    .reserve-hero-deco {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 42%;
+      background: linear-gradient(135deg, rgba(201,169,110,0.06) 0%, rgba(139,98,71,0.08) 100%);
+      border-left: 1px solid rgba(201,169,110,0.15);
+    }
+    .reserve-hero-deco::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 260px; height: 260px;
+      border: 1px solid rgba(201,169,110,0.12);
+      border-radius: 50%;
+    }
+    .reserve-hero-deco::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 160px; height: 160px;
+      border: 1px solid rgba(201,169,110,0.18);
+      border-radius: 50%;
+    }
+    .reserve-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .reserve-hero-inner .section-label {
+      margin-bottom: 1.2rem;
+    }
+    .reserve-hero-inner .section-title {
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+    .reserve-hero-subtitle {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.9rem;
+      font-weight: 300;
+    }
+    .reserve-hero-inner .gold-rule {
+      margin-top: 1.6rem;
+      width: 64px;
+    }
+
+    /* â”€â”€ Section Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .section-pad {
+      padding: 7rem 2rem;
+    }
+    .section-pad-sm {
+      padding: 5rem 2rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .container-sm {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* â”€â”€ Reservation Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .reserve-section {
+      background: var(--c-ivory);
+    }
+    .reserve-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* Contact info column */
+    .contact-info-col {}
+    .contact-info-col .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      margin-bottom: 0.5rem;
+    }
+    .contact-block {
+      margin-top: 2.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+    .contact-item {}
+    .contact-item-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-gold);
+      margin-bottom: 0.35rem;
+    }
+    .contact-item-value {
+      font-family: var(--ff-serif);
+      font-size: 1.05rem;
+      color: var(--c-choco);
+      line-height: 1.5;
+    }
+    .contact-item-sub {
+      font-size: 0.85rem;
+      color: var(--c-muted);
+      margin-top: 0.15rem;
+    }
+    .contact-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--c-light);
+      margin: 0.4rem 0;
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .social-link {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-warm);
+      border-bottom: 1px solid var(--c-light);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .social-link:hover {
+      color: var(--c-gold);
+      border-color: var(--c-gold);
+    }
+
+    /* Form column */
+    .form-card {
+      background: #fff;
+      border-radius: 2px;
+      box-shadow: 0 4px 32px rgba(44,24,16,0.08), 0 1px 4px rgba(44,24,16,0.04);
+      padding: 3rem 2.8rem;
+    }
+    .form-card-title {
+      font-family: var(--ff-serif);
+      font-size: 1.5rem;
+      color: var(--c-choco);
+      margin-bottom: 0.3rem;
+      font-weight: 400;
+    }
+    .form-card-sub {
+      font-size: 0.82rem;
+      color: var(--c-muted);
+      margin-bottom: 2rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-warm);
+      margin-bottom: 0.45rem;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      font-family: var(--ff-body);
+      font-size: 0.9rem;
+      color: var(--c-choco);
+      background: var(--c-cream);
+      border: 1px solid var(--c-light);
+      border-radius: 2px;
+      padding: 0.7rem 0.9rem;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    input[type="date"]:focus,
+    input[type="number"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--c-gold);
+      box-shadow: 0 0 0 3px rgba(201,169,110,0.14);
+      background: #fff;
+    }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B6247' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+      padding-right: 2.4rem;
+      cursor: pointer;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    input::placeholder,
+    textarea::placeholder { color: var(--c-light); }
+
+    .form-submit-row {
+      margin-top: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--c-muted);
+    }
+    .form-submit-btn {
+      width: 100%;
+      font-family: var(--ff-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--c-choco);
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 1px;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+      margin-top: 0.8rem;
+    }
+    .form-submit-btn:hover {
+      background: #3d2010;
+      transform: translateY(-1px);
+    }
+
+    /* Success message */
+    .form-success {
+      display: none;
+      background: var(--c-ivory);
+      border: 1px solid rgba(201,169,110,0.4);
+      border-radius: 2px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .form-success.show { display: block; }
+    .form-success-title {
+      font-family: var(--ff-serif);
+      font-size: 1.4rem;
+      color: var(--c-choco);
+      margin-bottom: 0.5rem;
+    }
+    .form-success-body {
+      font-size: 0.88rem;
+      color: var(--c-muted);
+    }
+    .form-success-rule {
+      width: 40px; height: 1px;
+      background: var(--c-gold);
+      margin: 0.8rem auto;
+    }
+
+    /* â”€â”€ Custom Cake Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .custom-section {
+      background: var(--c-choco);
+      position: relative;
+      overflow: hidden;
+    }
+    .custom-section::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      border: 1px solid rgba(201,169,110,0.1);
+      border-radius: 50%;
+    }
+    .custom-section::after {
+      content: '';
+      position: absolute;
+      bottom: -120px; left: -60px;
+      width: 320px; height: 320px;
+      border: 1px solid rgba(201,169,110,0.07);
+      border-radius: 50%;
+    }
+    .custom-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .custom-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+      align-items: end;
+    }
+    .custom-header-left {}
+    .custom-header-left .section-label { margin-bottom: 1rem; }
+    .custom-header-left .section-title { color: #fff; }
+    .custom-header-left .gold-rule { margin-top: 1.4rem; }
+    .custom-header-right .section-body {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.92rem;
+    }
+    .custom-specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 1.8rem;
+    }
+    .custom-spec-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    .custom-spec-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--c-gold);
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+    .custom-spec-text {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+    .custom-price-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(201,169,110,0.12);
+      border: 1px solid rgba(201,169,110,0.3);
+      border-radius: 1px;
+      padding: 0.6rem 1.2rem;
+      margin-top: 1.2rem;
+    }
+    .custom-price-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .custom-price-value {
+      font-family: var(--ff-serif);
+      font-size: 1.2rem;
+      color: var(--c-gold);
+      font-weight: 500;
+    }
+
+    /* Custom form */
+    .custom-form-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 2px;
+      padding: 3rem;
+    }
+    .custom-form-card label { color: rgba(255,255,255,0.5); }
+    .custom-form-card input,
+    .custom-form-card select,
+    .custom-form-card textarea {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(201,169,110,0.2);
+      color: rgba(255,255,255,0.85);
+    }
+    .custom-form-card input:focus,
+    .custom-form-card select:focus,
+    .custom-form-card textarea:focus {
+      border-color: var(--c-gold);
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 0 3px rgba(201,169,110,0.10);
+    }
+    .custom-form-card input::placeholder,
+    .custom-form-card textarea::placeholder {
+      color: rgba(255,255,255,0.2);
+    }
+    .custom-form-card select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A96E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+    .custom-form-card select option {
+      background: var(--c-choco);
+      color: rgba(255,255,255,0.85);
+    }
+    .custom-submit-btn {
+      width: 100%;
+      font-family: var(--ff-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-choco);
+      background: var(--c-gold);
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 1px;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .custom-submit-btn:hover { background: #d4b47e; transform: translateY(-1px); }
+
+    /* Custom success */
+    .custom-success {
+      display: none;
+      background: rgba(201,169,110,0.08);
+      border: 1px solid rgba(201,169,110,0.3);
+      border-radius: 2px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .custom-success.show { display: block; }
+    .custom-success-title {
+      font-family: var(--ff-serif);
+      font-size: 1.4rem;
+      color: var(--c-gold);
+      margin-bottom: 0.5rem;
+    }
+    .custom-success-body {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.55);
+    }
+    .custom-success-rule {
+      width: 40px; height: 1px;
+      background: var(--c-gold);
+      margin: 0.8rem auto;
+    }
+
+    /* â”€â”€ FAQ Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .faq-section { background: var(--c-cream); }
+    .faq-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .faq-header .gold-rule { margin: 1rem auto; }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .faq-item {
+      border-top: 1px solid var(--c-light);
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--c-light); }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.5rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      cursor: pointer;
+      text-align: left;
+    }
+    .faq-question-text {
+      font-family: var(--ff-serif);
+      font-size: 1.1rem;
+      color: var(--c-choco);
+      font-weight: 400;
+      line-height: 1.4;
+      flex: 1;
+    }
+    .faq-icon {
+      width: 28px; height: 28px;
+      border: 1px solid var(--c-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .faq-icon svg {
+      transition: transform 0.35s var(--ease-out);
+    }
+    .faq-item.open .faq-icon {
+      border-color: var(--c-gold);
+      background: var(--c-gold);
+    }
+    .faq-item.open .faq-icon svg { transform: rotate(45deg); }
+    .faq-item.open .faq-icon svg path { stroke: var(--c-choco); }
+    .faq-answer {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.45s var(--ease-out);
+    }
+    .faq-answer-inner {
+      padding-bottom: 1.5rem;
+    }
+    .faq-answer-inner p {
+      font-size: 0.9rem;
+      color: var(--c-muted);
+      line-height: 1.8;
+    }
+
+    /* â”€â”€ Map & Visit Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .map-section { background: var(--c-ivory); }
+    .map-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .map-info-col {}
+    .map-info-col .section-title {
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      margin-bottom: 0.5rem;
+    }
+    .map-info-col .gold-rule { margin-top: 0.8rem; margin-bottom: 1.5rem; }
+    .map-detail-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .map-detail-item {}
+    .map-detail-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-gold);
+      margin-bottom: 0.25rem;
+    }
+    .map-detail-value {
+      font-size: 0.92rem;
+      color: var(--c-choco);
+      line-height: 1.5;
+    }
+    .map-transport {
+      margin-top: 1.8rem;
+      padding: 1.2rem 1.4rem;
+      background: var(--c-cream);
+      border-left: 2px solid var(--c-gold);
+      border-radius: 1px;
+    }
+    .map-transport-title {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-warm);
+      margin-bottom: 0.6rem;
+    }
+    .map-transport-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .map-transport-list li {
+      font-size: 0.85rem;
+      color: var(--c-muted);
+      padding-left: 1rem;
+      position: relative;
+    }
+    .map-transport-list li::before {
+      content: 'â€”';
+      position: absolute;
+      left: 0;
+      color: var(--c-light);
+    }
+
+    .map-embed-col {}
+    .map-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--c-choco);
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 40% 50%, rgba(201,169,110,0.08) 0%, transparent 60%);
+    }
+    .map-placeholder-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.06;
+      background-image:
+        linear-gradient(rgba(201,169,110,0.8) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,169,110,0.8) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .map-pin {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .map-pin-icon {
+      width: 44px; height: 44px;
+      background: var(--c-gold);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .map-pin-icon::after {
+      content: '';
+      width: 14px; height: 14px;
+      background: var(--c-choco);
+      border-radius: 50%;
+    }
+    .map-pin-label {
+      position: relative;
+      z-index: 1;
+      font-family: var(--ff-serif);
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.05em;
+    }
+    .map-pin-addr {
+      position: relative;
+      z-index: 1;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+    .map-cta {
+      position: relative;
+      z-index: 1;
+      margin-top: 0.5rem;
+    }
+
+    /* â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    .site-footer {
+      background: var(--c-dark);
+      color: rgba(255,255,255,0.5);
+      padding: 5rem 2rem 2.5rem;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 2rem;
+    }
+    .footer-brand {}
+    .footer-brand-name {
+      font-family: var(--ff-serif);
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 0.8rem;
+      font-weight: 400;
+    }
+    .footer-brand-tagline {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.6;
+    }
+    .footer-rule {
+      width: 32px; height: 1px;
+      background: var(--c-gold);
+      margin: 1rem 0;
+      opacity: 0.6;
+    }
+    .footer-brand-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.7;
+    }
+    .footer-col {}
+    .footer-col-title {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-gold);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .footer-col ul li a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.8); }
+    .footer-col-text {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.8;
+    }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+    }
+    .footer-bottom-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-bottom-links a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+      transition: color 0.2s;
+    }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,0.55); }
+
+    /* â”€â”€ Mobile Nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 99;
+        background: var(--c-choco);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        list-style: none;
+      }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu .nav-link {
+        font-size: 1.3rem;
+        color: rgba(255,255,255,0.8);
+        letter-spacing: 0.12em;
+      }
+      .mobile-menu .nav-cta { font-size: 1rem; }
+
+      .reserve-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-card { padding: 2rem 1.5rem; }
+
+      .custom-header { grid-template-columns: 1fr; gap: 2rem; }
+      .custom-specs { grid-template-columns: 1fr; }
+      .custom-form-card { padding: 2rem 1.5rem; }
+
+      .map-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    @media (max-width: 1024px) {
+      .reserve-grid { gap: 3rem; }
+      .custom-header { gap: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- â•â• NAV â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <nav class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logos/yueijian-logo-white.svg" alt="ç¥è¦‹æ³•å¼ç”œé»" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span style="display:none;">ç¥è¦‹</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">é¦–é </a></li>
+        <li><a href="menu.html" class="nav-link">ç”œé»èœå–®</a></li>
+        <li><a href="about.html" class="nav-link">å“ç‰Œæ•…äº‹</a></li>
+        <li><a href="reserve.html" class="nav-link active">é ç´„è¨‚ä½</a></li>
+        <li><a href="reserve.html#custom" class="nav-cta">å®¢è£½è›‹ç³•</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="é–‹å•Ÿé¸å–®">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <ul class="mobile-menu" id="mobileMenu">
+    <li><a href="index.html" class="nav-link">é¦–é </a></li>
+    <li><a href="menu.html" class="nav-link">ç”œé»èœå–®</a></li>
+    <li><a href="about.html" class="nav-link">å“ç‰Œæ•…äº‹</a></li>
+    <li><a href="reserve.html" class="nav-link active">é ç´„è¨‚ä½</a></li>
+    <li><a href="reserve.html#custom" class="nav-cta">å®¢è£½è›‹ç³•</a></li>
+  </ul>
+
+
+  <!-- â•â• HERO â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <section class="reserve-hero">
+    <div class="reserve-hero-deco"></div>
+    <div class="reserve-hero-inner">
+      <p class="section-label reveal">RÃ©servation &amp; Contact</p>
+      <h1 class="section-title reveal reveal-delay-1">é ç´„è¨‚ä½</h1>
+      <p class="reserve-hero-subtitle reveal reveal-delay-2">RÃ©servez votre moment de douceur avec nous</p>
+      <div class="gold-rule reveal reveal-delay-3"></div>
+    </div>
+  </section>
+
+
+  <!-- â•â• RESERVATION FORM â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <section class="reserve-section section-pad" id="reservation">
+    <div class="container">
+      <div class="reserve-grid">
+
+        <!-- Left: Contact Info -->
+        <div class="contact-info-col">
+          <p class="section-label reveal">æ‰¾åˆ°æˆ‘å€‘</p>
+          <h2 class="section-title reveal reveal-delay-1">è¯çµ¡è³‡è¨Š</h2>
+          <div class="gold-rule reveal reveal-delay-2"></div>
+          <p class="section-body reveal reveal-delay-2" style="margin-top:0.2rem;">
+            æ­¡è¿è’è‡¨ç¥è¦‹ï¼Œæˆ‘å€‘æœŸå¾…åœ¨é€™è£¡èˆ‡æ‚¨å…±äº«æ¯ä¸€å€‹æ³•å¼ç¾å¥½æ™‚åˆ»ã€‚å¦‚æœ‰ä»»ä½•å•é¡Œï¼Œè«‹éš¨æ™‚èˆ‡æˆ‘å€‘è¯ç¹«ã€‚
+          </p>
+
+          <div class="contact-block">
+            <div class="contact-item reveal">
+              <p class="contact-item-label">åœ°å€</p>
+              <p class="contact-item-value">å°åŒ—å¸‚ä¿¡ç¾©å€å¿ å­æ±è·¯äº”æ®µ</p>
+              <p class="contact-item-sub">è¿‘æ·é‹å¸‚æ”¿åºœç«™ 2 è™Ÿå‡ºå£ï¼Œæ­¥è¡Œç´„ 5 åˆ†é˜</p>
+            </div>
+
+            <div class="contact-divider reveal"></div>
+
+            <div class="contact-item reveal">
+              <p class="contact-item-label">ç‡Ÿæ¥­æ™‚é–“</p>
+              <p class="contact-item-value">é€±äºŒ â”€ é€±æ—¥ã€€12:00 â”€ 20:00</p>
+              <p class="contact-item-sub">é€±ä¸€å…¬ä¼‘ ï¼ åœ‹å®šå‡æ—¥ä¾å…¬å‘Šèª¿æ•´</p>
+            </div>
+
+            <div class="contact-divider reveal"></div>
+
+            <div class="contact-item reveal">
+              <p class="contact-item-label">é›»è©±</p>
+              <p class="contact-item-value">02-2789-XXXX</p>
+              <p class="contact-item-sub">é€±äºŒè‡³é€±æ—¥ 11:00 â”€ 19:00 æ¥è½</p>
+            </div>
+
+            <div class="contact-divider reveal"></div>
+
+            <div class="contact-item reveal">
+              <p class="contact-item-label">é›»å­éƒµä»¶</p>
+              <p class="contact-item-value">hello@yueijian.com</p>
+              <p class="contact-item-sub">æˆ‘å€‘é€šå¸¸æ–¼ 1 å€‹å·¥ä½œå¤©å…§å›è¦†</p>
+            </div>
+
+            <div class="contact-divider reveal"></div>
+
+            <div class="contact-item reveal">
+              <p class="contact-item-label">ç¤¾ç¾¤åª’é«”</p>
+              <div class="social-links">
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">LINE å®˜æ–¹å¸³è™Ÿ</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="form-col">
+          <div class="form-card reveal">
+            <h3 class="form-card-title">ç·šä¸Šé ç´„</h3>
+            <p class="form-card-sub">è«‹å¡«å¯«ä»¥ä¸‹è³‡è¨Šï¼Œæˆ‘å€‘å°‡æ–¼ 24 å°æ™‚å…§ä»¥ Email æˆ–é›»è©±ç¢ºèªæ‚¨çš„è¨‚ä½ã€‚</p>
+
+            <form id="reserveForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">å§“å</label>
+                  <input type="text" id="name" name="name" placeholder="æ‚¨çš„å§“å" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">é›»å­éƒµä»¶</label>
+                  <input type="email" id="email" name="email" placeholder="your@email.com" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="phone">è¯çµ¡é›»è©±</label>
+                  <input type="tel" id="phone" name="phone" placeholder="09XX-XXX-XXX" />
+                </div>
+                <div class="form-group">
+                  <label for="date">é ç´„æ—¥æœŸ</label>
+                  <input type="date" id="date" name="date" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="timeslot">æ™‚æ®µ</label>
+                  <select id="timeslot" name="timeslot" required>
+                    <option value="" disabled selected>è«‹é¸æ“‡æ™‚æ®µ</option>
+                    <option value="12-14">12:00 â”€ 14:00</option>
+                    <option value="14-16">14:00 â”€ 16:00</option>
+                    <option value="16-18">16:00 â”€ 18:00</option>
+                    <option value="18-20">18:00 â”€ 20:00</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="guests">äººæ•¸</label>
+                  <select id="guests" name="guests" required>
+                    <option value="" disabled selected>è«‹é¸æ“‡äººæ•¸</option>
+                    <option value="1">1 ä½</option>
+                    <option value="2">2 ä½</option>
+                    <option value="3">3 ä½</option>
+                    <option value="4">4 ä½</option>
+                    <option value="5">5 ä½</option>
+                    <option value="6">6 ä½</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label fi½Èô‰¹½Ñ•Ìˆû&çšº+¦ršÆğ½±…‰•°ø(€€€€€€€€€€€€€€€€ñÑ•áÑ…É•„¥ô‰¹½Ñ•Ìˆ¹…µ”ô‰¹½Ñ•ÌˆÁ±…•¡½±‘•Èô‹¦;šV?–:šÛR¦ršÆ–²Ã–Kš’¶'¾ò3š¶‡¢ş;–F+~—š"G–Dˆøğ½Ñ•áÑ…É•„ø(€€€€€€€€€€€€€€ğ½‘¥Øø((€€€€€€€€€€€€€€ñÀ±…ÍÌô‰™½É´µ¹½Ñ”ˆû¦–ë–ú3¾ò3š"G–G–ÂšZğ€ÈĞƒ–Â?šf–Ÿ¢"š
+£Šë¢ª7¢¢’ö7–š¦r–6Ïšf–6S–*§¾ò3š¶‡¢ş;’ú¦nïğ½Àø(€€€€€€€€€€€€€€ñ‰ÕÑÑ½¸ÑåÁ”ô‰ÍÕ‰µ¥Ğˆ±…ÍÌô‰™½É´µÍÕ‰µ¥Ğµ‰Ñ¸ˆû¦–ë¦‚CÒRÏ¢®,ğ½‰ÕÑÑ½¸ø(€€€€€€€€€€€€ğ½™½É´ø((€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÍÕ•ÍÌˆ¥ô‰É•Í•ÉÙ•MÕ•ÍÌˆø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÍÕ•ÍÌµÉÕ±”ˆøğ½‘¥Øø(€€€€€€€€€€€€€€ñ Ğ±…ÍÌô‰™½É´µÍÕ•ÍÌµÑ¥Ñ±”ˆûš¢²wš
+£j¦‚CÒğ½ Ğø(€€€€€€€€€€€€€€ñÀ±…ÍÌô‰™½É´µÍÕ•ÍÌµ‰½‘äˆûš
+£j¦‚CÒRÏ¢®/–ŞËšRÛ–"Ãš"G–G–ÂšZğ€ÈĞƒ–Â?šf–Ÿ’î—¦nï¢¦Çš"Xµ…¥°ƒ¢"š
+£Šë¢ª7ñ‰È€¼ûšr–ú¢"š
+£nã¢š/ğ½Àø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÍÕ•ÍÌµÉÕ±”ˆøğ½‘¥Øø(€€€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€ğ½‘¥Øø((€€€€€€ğ½‘¥Øø(€€€€ğ½‘¥Øø(€€ğ½Í•Ñ¥½¸ø(((€€ğ„´´ƒŠVCŠV@UMQ=4-ƒŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠV@€´´ø(€€ñÍ•Ñ¥½¸±…ÍÌô‰ÕÍÑ½´µÍ•Ñ¥½¸Í•Ñ¥½¸µÁ…ˆ¥ô‰ÕÍÑ½´ˆø(€€€€ñ‘¥Ø±…ÍÌô‰½¹Ñ…¥¹•ÈÕÍÑ½´µ¥¹¹•Èˆø((€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µ¡•…‘•Èˆø(€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µ¡•…‘•Èµ±•™Ğˆø(€€€€€€€€€€ñÀ±…ÍÌô‰Í•Ñ¥½¸µ±…‰•°É•Ù•…°ˆùMÕÈ½µµ…¹‘”ğ½Àø(€€€€€€€€€€ñ È±…ÍÌô‰Í•Ñ¥½¸µÑ¥Ñ±”É•Ù•…°É•Ù•…°µ‘•±…ä´Äˆû–º‹¢÷¢n/ÎWšr7–.dğ½ Èø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰½±µÉÕ±”É•Ù•…°É•Ù•…°µ‘•±…ä´Èˆøğ½‘¥Øø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÁÉ¥”µ‰…‘”É•Ù•…°É•Ù•…°µ‘•±…ä´Èˆø(€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰ÕÍÑ½´µÁÉ¥”µ±…‰•°ˆû¢Öß–äğ½ÍÁ…¸ø(€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰ÕÍÑ½´µÁÉ¥”µÙ…±Õ”ˆù9P€Ğ°àÀÀğ½ÍÁ…¸ø(€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€ğ½‘¥Øø(€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µ¡•…‘•ÈµÉ¥¡ĞÉ•Ù•…°É•Ù•…°µ‘•±…ä´Äˆø(€€€€€€€€€€ñÀ±…ÍÌô‰Í•Ñ¥½¸µ‰½‘äˆø(€€€€€€€€€€€ƒ:—¢š/jš¾?’âš²û–º‹¢÷¢n/ÎW¾ò3jRÇRs¦î{–â¯¢"š
+£’â–Â7’âšŞÇ–ê›šêw¦k¾ò3–ú{¦Š£–FÏ–"ÃšvC¢Î«–ú{¢&Ë¢ªÿ–"Ã¦ƒ–z/¾ò3ÒÃŞïš&O£–ë–>«–Æ³šZóš
+£j¦
+’â’îÛ’ös–N(€€€€€€€€€€ğ½Àø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÁ•Ìˆø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÁ•Œµ¥Ñ•´ˆø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÁ•Œµ‘½Ğˆøğ½‘¥Øø(€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰ÕÍÑ½´µÍÁ•ŒµÑ•áĞˆû¢®/šZó’öÿR£š^—šr|€ñÍÑÉ½¹œÍÑå±”ô‰½±½ÈéÉ‰„ ÈÔÔ°ÈÔÔ°ÈÔÔ°À¸ÜÔ¤ìˆøÄĞƒ–’§–&4ğ½ÍÑÉ½¹œøƒš>C–ëRÏ¢®,ğ½ÍÁ…¸ø(€€€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÁ•Œµ¥Ñ•´ˆø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÁ•Œµ‘½Ğˆøğ½‘¥Øø(€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰ÕÍÑ½´µÍÁ•ŒµÑ•áĞˆû’â–Â7’â¢¢·¢¢#¢®»¢¦‹¾ò3–£¢/–Â#–Æ³šr7–.dğ½ÍÁ…¸ø(€€€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÁ•Œµ¥Ñ•´ˆø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÁ•Œµ‘½Ğˆøğ½‘¥Øø(€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰ÕÍÑ½´µÍÁ•ŒµÑ•áĞˆû’úw¦Š£–FÏšvC¢Î«¢&Ë¢ªÿ¢«RÇ–º‹¢ôğ½ÍÁ…¸ø(€€€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÁ•Œµ¥Ñ•´ˆø(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÁ•Œµ‘½Ğˆøğ½‘¥Øø(€€€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰ÕÍÑ½´µÍÁ•ŒµÑ•áĞˆû–¦kš»Rš^—Ò–ş×š^—–Vš–·šÒï–.W–v–>¿š&ÿš:”ğ½ÍÁ…¸ø(€€€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€ğ½‘¥Øø(€€€€€€ğ½‘¥Øø((€€€€€€ğ„´´ÕÍÑ½´…­”½É´€´´ø(€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µ™½É´µ…ÉÉ•Ù•…°ˆø(€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÉ½ÜˆÍÑå±”ô‰µ…É¥¸µ‰½ÑÑ½´èÀìˆø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÉ½ÕÀˆø(€€€€€€€€€€€€ñ±…‰•°™½Èô‰¹…µ”ˆû–O–B4ğ½±…‰•°ø(€€€€€€€€€€€€ñ¥¹ÁÕĞÑåÁ”ô‰Ñ•áĞˆ¥ô‰¹…µ”ˆ¹…µ”ô‰¹…µ”ˆÁ±…•¡½±‘•Èô‹š
+£j–O–B4ˆ€¼ø(€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÉ½ÕÀˆø(€€€€€€€€€€€€ñ±…‰•°™½Èô‰½¹Ñ…Ğˆû¢¿Ö‡šZç–ò<ğ½±…‰•°ø(€€€€€€€€€€€€ñ¥¹ÁÕĞÑåÁ”ô‰Ñ•áĞˆ¥ô‰½¹Ñ…Ğˆ¹…µ”ô‰½¹Ñ…ĞˆÁ±…•¡½±‘•Èô‹¦nï¢¦Çš"Xµ…¥°ˆ€¼ø(€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€ğ½‘¥Øø(€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÉ½Üˆø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÉ½ÕÀˆø(€€€€€€€€€€€€ñ±…‰•°™½Èô‰ÁÕÉÁ½Í”ˆûR£¦Pğ½±…‰•°ø(€€€€€€€€€€€€ñÍ•±•Ğ¥ô‰ÁÕÉÁ½Í”ˆ¹…µ”ô‰ÁÕÉÁ½Í”ˆø(€€€€€€€€€€€€€€ñ½ÁÑ¥½¸Ù…±Õ”ôˆˆ‘¥Í…‰±•Í•±•Ñ•û¢®/¦ãšNR£¦Pğ½½ÁÑ¥½¸ø(€€€€€€€€€€€€€€ñ½ÁÑ¥½¸Ù…±Õ”ô‰İ•‘‘¥¹œˆû–¦kš¸ğ½½ÁÑ¥½¸ø(€€€€€€€€€€€€€€ñ½ÁÑ¥½¸Ù…±Õ”ô‰‰¥ÉÑ¡‘…äˆûRš^”ğ½½ÁÑ¥½¸ø(€€€€€€€€€€€€€€ñ½ÁÑ¥½¸Ù…±Õ”ô‰…¹¹¥Ù•ÉÍ…Éäˆû¦Ç–æÓÒ–şÔğ½½ÁÑ¥½¸ø(€€€€€€€€€€€€€€ñ½ÁÑ¥½¸Ù…±Õ”ô‰½ÉÁ½É…Ñ”ˆû–Vš–·šÒï–.Tğ½½ÁÑ¥½¸ø(€€€€€€€€€€€€€€ñ½ÁÑ¥½¸Ù…±Õ”ô‰½Ñ¡•Èˆû–Û’îXğ½½ÁÑ¥½¸ø(€€€€€€€€€€€€ğ½Í•±•Ğø(€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÉ½ÕÀˆø(€€€€€€€€€€€€ñ±…‰•°™½Èô‰‘…Ñ”ˆû’öÿR£š^—šr|ğ½±…‰•°ø(€€€€€€€€€€€€ñ¥¹ÁÕĞÑåÁ”ô‰‘…Ñ”ˆ¥ô‰‘…Ñ”ˆ¹…µ”ô‰‘…Ñ”ˆ€¼ø(€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€ğ½‘¥Øø(€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÉ½Üˆø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÉ½ÕÀˆø(€€€€€€€€€€€€ñ±…‰•°™½Èô‰Õ•ÍÑÌˆûšr7–.g’êëšVàğ½±…‰•°ø(€€€€€€€€€€€€ñ¥¹ÁÕĞÑåÁ”ô‰¹Õµ‰•Èˆ¥ô‰Õ•ÍÑÌˆ¹…µ”ô‰Õ•ÍÑÌˆÁ±…•¡½±‘•Èô‹¦‚C¢¢#’êëšVàˆµ¥¸ôˆÄˆ€¼ø(€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÉ½ÕÀˆø(€€€€€€€€€€€€ñ±…‰•°™½Èô‰‰Õ‘•Ğˆû¦‚Cº_¾–r4ğ½±…‰•°ø(€€€€€€€€€€€€ñÍ•±•Ğ¥ô‰‰Õ‘•Ğˆ¹…µ”ô‰‰Õ‘•Ğˆø(€€€€€€€€€€€€€€ñ½ÁÑ¥½¸Ù…±Õ”ôˆˆ‘¥Í…‰±•Í•±•Ñ•û¢®/¦ãšN¦‚Cº\ğ½½ÁÑ¥½¸ø(€€€€€€€€€€€€€€ñ½ÁÑ¥½¸Ù…±Õ”ôˆĞàÀÀ´àÀÀÀˆù9P€Ğ°àÀÀƒŠR €à°ÀÀÀğ½½ÁÑ¥½¸ø(€€€€€€€€€€€€€€ñ½ÁÑ¥½¸Ù…±Õ”ôˆàÀÀÀ´ÄÔÀÀÀˆù9P€à°ÀÀÀƒŠR €ÄÔ°ÀÀÀğ½½ÁÑ¥½¸ø(€€€€€€€€€€€€€€ñ½ÁÑ¥½¸Ù…±Õ”ôˆÄÔÀÀÀ´ÌÀÀÀÀˆù9P€ÄÔ°ÀÀÀƒŠR €ÌÀ°ÀÀÀğ½½ÁÑ¥½¸ø(€€€€€€€€€€€€€€ñ½ÁÑ¥½¸Ù…±Õ”ôˆÌÀÀÀÀ¬ˆù9P€ÌÀ°ÀÀÀƒ’î—’â(ğ½½ÁÑ¥½¸ø(€€€€€€€€€€€€ğ½Í•±•Ğø(€€€€€€€€€€ğ½‘¥Øø(€€€€€€€€ğ½‘¥Øø(€€€€€€€€ñ‘¥Ø±…ÍÌô‰™½É´µÉ½ÕÀˆø(€€€€€€€€€€ñ±…‰•°™½Èô‰‘•Í¥¸ˆû¢¢·¢¢#š>?¢şÀğ½±…‰•°ø(€€€€€€€€€€ñÑ•áÑ…É•„¥ô‰‘•Í¥¸ˆ¹…µ”ô‰‘•Í¥¸ˆÍÑå±”ô‰µ¥¸µ¡•¥¡ĞèÄÌÁÁàìˆÁ±…•¡½±‘•Èô‹¢®/š>?¢şÃš
+£j¢¢·¢¢#šÏ–?¾òk¢&Ë¢ªÿ¦ƒ–z/¦Š£–FÏ–?––÷¦v#š–r[&¦ÖC¶'¾ò3¢Ú+¢¦ÏÒÃ¢Ú+––÷ˆøğ½Ñ•áÑ…É•„ø(€€€€€€€€ğ½‘¥Øø(€€€€€€€€ñ‰ÕÑÑ½¸ÑåÁ”ô‰‰ÕÑÑ½¸ˆ±…ÍÌô‰ÕÍÑ½´µÍÕ‰µ¥Ğµ‰Ñ¸ˆ¥ô‰ÕÍÑ½µMÕ‰µ¥Ñ	Ñ¸ˆû¦–ë–º‹¢÷RÏ¢®,ğ½‰ÕÑÑ½¸ø((€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÕ•ÍÌˆ¥ô‰ÕÍÑ½µMÕ•ÍÌˆø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÕ•ÍÌµÉÕ±”ˆøğ½‘¥Øø(€€€€€€€€€€ñ Ğ±…ÍÌô‰ÕÍÑ½´µÍÕ•ÍÌµÑ¥Ñ±”ˆûRÏ¢®/–ŞËšRÛ–"Àğ½ Ğø(€€€€€€€€€€ñÀ±…ÍÌô‰ÕÍÑ½´µÍÕ•ÍÌµ‰½‘äˆûš¢²wš
+£j–S¢¢_š"G–GjRs¦î{–â¯–ÂšZğ€Ìƒ–/–Ş—’ös–’§–Ÿ¢"š
+£¢¿æ¯¾ò3–ÆW¦Z/’â–Â7’â¢¢·¢¢#¢®»¢¦‹ğ½Àø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰ÕÍÑ½´µÍÕ•ÍÌµÉÕ±”ˆøğ½‘¥Øø(€€€€€€€€ğ½‘¥Øø(€€€€€€ğ½‘¥Øø((€€€€ğ½‘¥Øø(€€ğ½Í•Ñ¥½¸ø(((€€ğ„´´ƒŠVCŠV@DƒŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠVCŠV@€´´ø(€€ñÍ•Ñ¥½¸±…ÍÌô‰™…ÄµÍ•Ñ¥½¸Í•Ñ¥½¸µÁ…ˆ¥ô‰™…Äˆø(€€€€ñ‘¥Ø±…ÍÌô‰½¹Ñ…¥¹•ÈµÍ´ˆø(€€€€€€ñ‘¥Ø±…ÍÌô‰™…Äµ¡•…‘•Èˆø(€€€€€€€€ñÀ±…ÍÌô‰Í•Ñ¥½¸µ±…‰•°É•Ù•…°ˆùEÕ•ÍÑ¥½¹ÌË¥ÅÕ•¹Ñ•Ìğ½Àø(€€€€€€€€ñ È±…ÍÌô‰Í•Ñ¥½¸µÑ¥Ñ±”É•Ù•…°É•Ù•…°µ‘•±…ä´Äˆû–âã¢š/–V?¦†0ğ½ Èø(€€€€€€€€ñ‘¥Ø±…ÍÌô‰½±µÉÕ±”É•Ù•…°É•Ù•…°µ‘•±…ä´Èˆøğ½‘¥Øø(€€€€€€ğ½‘¥Øø((€€€€€€ñ‘¥Ø±…ÍÌô‰™…Äµ±¥ÍĞÉ•Ù•…°ˆø((€€€€€€€€ñ‘¥Ø±…ÍÌô‰™…Äµ¥Ñ•´ˆø(€€€€€€€€€€ñ‰ÕÑÑ½¸±…ÍÌô‰™…ÄµÅÕ•ÍÑ¥½¸ˆ…É¥„µ•áÁ…¹‘•ô‰™…±Í”ˆø(€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰™…ÄµÅÕ•ÍÑ¥½¸µÑ•áĞˆû¦‚CÒ–ú3šb¿–B›¦r¢ššR¿’îc¢¢¦G¾ò|ğ½ÍÁ…¸ø(€€€€€€€€€€€€ñÍÁ…¸±…ÍÌô‰™…Äµ¥½¸ˆø(€€€€€€€€€€€€€€ñÍÙœİ¥‘Ñ ôˆÄÈˆ¡•¥¡ĞôˆÄÈˆÙ¥•İ	½àôˆÀ€À€ÄÈ€ÄÈˆ™¥±°ô‰¹½¹”ˆáµ±¹Ìô‰¡ÑÑÀè¼½İİÜ¹ÜÌ¹½Éœ¼ÈÀÀÀ½ÍÙœˆø(€€€€€€€€€€€€€€€€ñÁ…Ñ ô‰4Ø€ÅØÄÁ4Ä€Ù ÄÀˆÍÑÉ½­”ôˆŒáØÈĞÜˆÍÑÉ½­”µİ¥‘Ñ ôˆÄ¸ÔˆÍÑÉ½­”µ±¥¹•…Àô‰É½Õ¹ˆ¼ø(€€€€€€€€€€€€€€ğ½ÍÙœø(€€€€€€€€€€€€ğ½ÍÁ…¸ø(€€€€€€€€€€ğ½‰ÕÑÑ½¸ø(€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰™…Äµ…¹Íİ•Èˆø(€€€€€€€€€€€€ñ‘¥Ø±…ÍÌô‰™…Äµ…¹Íİ•Èµ¥¹¹•Èˆø(€€€€€€€€€€€€€€ñÀû’â¢"³–ŸR£¦‚CÒ‡¦rš>C–&7šR¿’îc¢¢¦G–š¦¦–š"[&çšº+¾š^—¾ò#š’êë¾¢[¢ªW¾¶'¾ò'¾ò3š"G–G–>¿¢÷šr¢ššÆ–Â?¦†7¦‚C¢¢’şw¢¶'¦G¾ò3–Æšf–ÂšZóŠë¢ª7¢¢+š¿’â·¢ª«šb;–º‹¢÷¢n/ÎW¢¢–Z»–&¦ršZóŠë¢ª7¢¢·¢¢#–ú3šR¿’î`€ÔÀ”ƒ¢¢¦G¾ò3’î—–"§–
+gšZgšê[–
+gğ½Àø(€€€        </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">ä½ å€‘æœ‰æä¾›ç„¡éº©è³ªæˆ–ç´”ç´ ç”œé»å—ï¼Ÿ</span>
+            <span class="faq-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 1v10M1 6h10" stroke="#8B6247" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>æˆ‘å€‘éƒ¨åˆ†ç”œé»ç³»åˆ—å‚™æœ‰ç„¡éº©è³ªé¸é …ï¼Œç´”ç´ é¸é …å‰‡ä»¥å­£ç¯€æ€§ç‰¹æ®Šå“é …ç‚ºä¸»ã€‚å¦‚æ‚¨æœ‰é£²é£Ÿé™åˆ¶æˆ–åš´é‡éæ•ï¼Œè«‹æ–¼é ç´„æ™‚åœ¨ç‰¹æ®Šéœ€æ±‚æ¬„ä½è©³ç´°å‘ŠçŸ¥ï¼Œæˆ–æå‰è‡´é›»ï¼Œæˆ‘å€‘çš„ç”œé»å¸«å°‡ç‚ºæ‚¨ç¢ºèªç•¶å­£å¯æä¾›çš„é¸é …ã€‚</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">å–æ¶ˆæˆ–æ›´æ”¹é ç´„çš„è¦å®šç‚ºä½•ï¼Ÿ</span>
+            <span class="faq-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 1v10M1 6h10" stroke="#8B6247" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>è‹¥éœ€å–æ¶ˆæˆ–æ›´æ”¹é ç´„ï¼Œè«‹è‡³å°‘æ–¼è¨‚ä½æ™‚é–“çš„ <strong>24 å°æ™‚å‰</strong> ä¾†é›»æˆ–å‚³é€ LINE è¨Šæ¯é€šçŸ¥æˆ‘å€‘ï¼Œä»¥åˆ©æˆ‘å€‘èª¿åº¦åº§ä½å®‰æ’ã€‚è‹¥é€¾æ™‚æœªåˆ°æˆ–æœªäº‹å…ˆå‘ŠçŸ¥ï¼Œæ•ä¸ä¿ç•™åº§ä½ï¼Œä¸”å¾ŒçºŒè¨‚ä½å„ªå…ˆé †åºå°‡å—åˆ°å½±éŸ¿ã€‚æˆ‘å€‘æ„Ÿè¬æ‚¨çš„ç†è§£èˆ‡é…åˆã€‚</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">å®¢è£½è›‹ç³•éœ€è¦æå‰å¤šä¹…é è¨‚ï¼Ÿ</span>
+            <span class="faq-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 1v10M1 6h10" stroke="#8B6247" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>å®¢è£½è›‹ç³•è«‹æ–¼<strong>ä½¿ç”¨æ—¥æœŸ 14 å¤©å‰</strong>æå‡ºç”³è«‹ï¼Œä»¥ç¢ºä¿è¨­è¨ˆè«®è©¢èˆ‡å‚™æ–™è£½ä½œçš„å……è£•æ™‚é–“ã€‚å©šç¦®ä¸»é¡Œæˆ–å¤§å‹å•†æ¥­æ´»å‹•è›‹ç³•ï¼Œå»ºè­°æå‰ <strong>30 å¤©ä»¥ä¸Š</strong>è¯ç¹«ï¼Œä»¥ä¾¿ç”œé»å¸«ç‚ºæ‚¨è¦åŠƒæœ€å®Œæ•´çš„è¨­è¨ˆæ–¹æ¡ˆã€‚æ—ºå­£ï¼ˆäºŒæœˆã€åäºŒæœˆï¼‰æœŸé–“ï¼Œè¨‚å–®å¯èƒ½æå‰é¡æ»¿ï¼Œå»ºè­°å„˜æ—©æ´½è©¢ã€‚</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">åº—é™„è¿‘æœ‰åœè»Šä½å—ï¼Ÿ</span>
+            <span class="faq-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 1v10M1 6h10" stroke="#8B6247" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>æœ¬åº—é„°è¿‘æ·é‹å¸‚æ”¿åºœç«™ï¼Œæ­¥è¡Œç´„ 5 åˆ†é˜å¯åˆ°é”ï¼Œå»ºè­°ä»¥å¤§çœ¾é‹è¼¸å‰ä¾†ã€‚è‹¥é–‹è»Šå‰å¾€ï¼Œå¿ å­æ±è·¯äº”æ®µæ²¿ç·šæœ‰å¤šè™•è·¯é‚Šåœè»Šæ ¼åŠåœè»Šå ´å¯ä¾›ä½¿ç”¨ã€‚ä¿¡ç¾©å€æ–°å…‰ä¸‰è¶Š A4 é¤¨åŠå°åŒ— 101 åœ°ä¸‹åœè»Šå ´è·æœ¬åº—æ­¥è¡Œç´„ 10 åˆ†é˜ï¼Œäº¦ç‚ºå¯é¸æ“‡ä¹‹åœè»Šåœ°é»ã€‚</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- â•â• MAP & VISIT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <section class="map-section section-pad" id="visit">
+    <div class="container">
+      <div class="map-grid">
+
+        <div class="map-info-col">
+          <p class="section-label reveal">Nous Rendre Visite</p>
+          <h2 class="section-title reveal reveal-delay-1">ä¾†åº—æ‹œè¨ª</h2>
+          <div class="gold-rule reveal reveal-delay-2"></div>
+
+          <div class="map-detail-list reveal reveal-delay-2">
+            <div class="map-detail-item">
+              <p class="map-detail-label">åœ°å€</p>
+              <p class="map-detail-value">å°åŒ—å¸‚ä¿¡ç¾©å€å¿ å­æ±è·¯äº”æ®µ</p>
+            </div>
+            <div class="map-detail-item">
+              <p class="map-detail-label">ç‡Ÿæ¥­æ™‚é–“</p>
+              <p class="map-detail-value">é€±äºŒ â”€ é€±æ—¥ã€€12:00 â”€ 20:00<br /><span style="font-size:0.85rem;color:var(--c-muted);">é€±ä¸€å…¬ä¼‘</span></p>
+            </div>
+            <div class="map-detail-item">
+              <p class="map-detail-label">é›»è©±</p>
+              <p class="map-detail-value">02-2789-XXXX</p>
+            </div>
+          </div>
+
+          <div class="map-transport reveal reveal-delay-3">
+            <p class="map-transport-title">äº¤é€šæŒ‡å¼•</p>
+            <ul class="map-transport-list">
+              <li>æ·é‹æ¿å—ç·šã€Œå¸‚æ”¿åºœç«™ã€2 è™Ÿå‡ºå£ï¼Œæ­¥è¡Œç´„ 5 åˆ†é˜</li>
+              <li>å…¬è»Š 212ã€225ã€605 æ–¼å¿ å­æ±è·¯äº”æ®µç«™ä¸‹è»Š</li>
+              <li>YouBike ä¿¡ç¾©æ–°å…‰ç«™è·æœ¬åº—æ­¥è¡Œ 3 åˆ†é˜</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="map-embed-col reveal reveal-delay-1">
+          <div class="map-placeholder">
+            <div class="map-placeholder-grid"></div>
+            <div class="map-pin">
+              <div class="map-pin-icon"></div>
+            </div>
+            <p class="map-pin-label">ç¥è¦‹æ³•å¼ç”œé»</p>
+            <p class="map-pin-addr">å°åŒ—å¸‚ä¿¡ç¾©å€å¿ å­æ±è·¯äº”æ®µ</p>
+            <a href="https://maps.google.com" target="_blank" rel="noopener" class="map-cta btn-gold" style="font-size:0.78rem;padding:0.6rem 1.4rem;border-radius:1px;">
+              åœ¨ Google Maps é–‹å•Ÿ
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- â•â• FOOTER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="footer-brand-name">ç¥è¦‹æ³•å¼ç”œé»</p>
+          <p class="footer-brand-tagline">PÃ¢tisserie FranÃ§aise Yueijian</p>
+          <div class="footer-rule"></div>
+          <p class="footer-brand-desc">ä»¥æ³•å¼ç²¾ç¥èˆ‡å°ç£åœŸåœ°çš„æº«åº¦ï¼Œ<br />å‰µä½œæ¯ä¸€ä»¶å€¼å¾—è¢«è¨˜ä½çš„ç”œé»ã€‚</p>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">æ¢ç´¢</p>
+          <ul>
+            <li><a href="index.html">é¦–é </a></li>
+            <li><a href="menu.html">ç”œé»èœå–®</a></li>
+            <li><a href="about.html">å“ç‰Œæ•…äº‹</a></li>
+            <li><a href="reserve.html">é ç´„è¨‚ä½</a></li>
+            <li><a href="reserve.html#custom">å®¢è£½è›‹ç³•</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">è¯çµ¡æˆ‘å€‘</p>
+          <p class="footer-col-text">
+            å°åŒ—å¸‚ä¿¡ç¾©å€å¿ å­æ±è·¯äº”æ®µ<br /><br />
+            02-2789-XXXX<br />
+            hello@yueijian.com
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">æ™‚é–“</p>
+          <p class="footer-col-text">
+            é€±äºŒ â”€ é€±äº”<br />
+            12:00 â”€ 20:00<br /><br />
+            é€±å…­ â”€ é€±æ—¥<br />
+            11:00 â”€ 20:00<br /><br />
+            é€±ä¸€å…¬ä¼‘
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2025 ç¥è¦‹æ³•å¼ç”œé» Yueijian Patisserie. All rights reserved.</p>
+        <ul class="footer-bottom-links">
+          <li><a href="#">éš±ç§æ”¿ç­–</a></li>
+          <li><a href="#">ä½¿ç”¨æ¢æ¬¾</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- â•â• SCRIPTS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <script src="js/main.js" defer></script>
+  <script>
+    // â”€â”€ Nav scroll & hamburger â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    (function () {
+      const nav = document.getElementById('siteNav');
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
+
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+      });
+      // Init on load
+      if (window.scrollY > 40) nav.classList.add('scrolled');
+
+      hamburger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+      });
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+
+    // â”€â”€ Reveal on scroll â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(el => observer.observe(el));
+    })();
+
+    // â”€â”€ Reservation form submit â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    (function () {
+      const form = document.getElementById('reserveForm');
+      const success = document.getElementById('reserveSuccess');
+
+      // Set min date to today
+      const dateInput = document.getElementById('date');
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const date = document.getElementById('date').value;
+        const timeslot = document.getElementById('timeslot').value;
+        const guests = document.getElementById('guests').value;
+
+        if (!name || !email || !date || !timeslot || !guests) {
+          // Simple inline validation highlight
+          [
+            { id: 'name', val: name },
+            { id: 'email', val: email },
+            { id: 'date', val: date },
+            { id: 'timeslot', val: timeslot },
+            { id: 'guests', val: guests }
+          ].forEach(({ id, val }) => {
+            const el = document.getElementById(id);
+            if (!val) {
+              el.style.borderColor = '#c0392b';
+              el.addEventListener('input', function fix() {
+                el.style.borderColor = '';
+                el.removeEventListener('input', fix);
+                el.removeEventListener('change', fix);
+              });
+              el.addEventListener('change', function fix() {
+                el.style.borderColor = '';
+                el.removeEventListener('input', fix);
+                el.removeEventListener('change', fix);
+              });
+            }
+          });
+          return;
+        }
+
+        // Demo: hide form, show success
+        form.style.display = 'none';
+        success.classList.add('show');
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    })();
+
+    // â”€â”€ Custom cake form submit â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    (function () {
+      const btn = document.getElementById('customSubmitBtn');
+      const success = document.getElementById('customSuccess');
+      const cdateInput = document.getElementById('cdate');
+      const today = new Date().toISOString().split('T')[0];
+      cdateInput.setAttribute('min', today);
+
+      btn.addEventListener('click', function () {
+        const cname = document.getElementById('cname').value.trim();
+        const ccontact = document.getElementById('ccontact').value.trim();
+        if (!cname || !ccontact) {
+          [
+            { id: 'cname', val: cname },
+            { id: 'ccontact', val: ccontact }
+          ].forEach(({ id, val }) => {
+            if (!val) {
+              const el = document.getElementById(id);
+              el.style.borderColor = '#c0392b';
+              el.addEventListener('input', function fix() {
+                el.style.borderColor = '';
+                el.removeEventListener('input', fix);
+              });
+            }
+          });
+          return;
+        }
+        // Show success
+        btn.style.display = 'none';
+        success.classList.add('show');
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    })();
+
+    // â”€â”€ FAQ accordion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    (function () {
+      const items = document.querySelectorAll('.faq-item');
+      items.forEach(item => {
+        const btn = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        const inner = item.querySelector('.faq-answer-inner');
+
+        btn.addEventListener('click', () => {
+          const isOpen = item.classList.contains('open');
+          // Close all
+          items.forEach(i => {
+            i.classList.remove('open');
+            i.querySelector('.faq-answer').style.maxHeight = '0';
+            i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          });
+          // Open clicked if it was closed
+          if (!isOpen) {
+            item.classList.add('open');
+            answer.style.maxHeight = inner.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
