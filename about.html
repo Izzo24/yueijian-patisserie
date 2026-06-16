@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>品牌故事 — 玥見法式甜點 Yueijian Patisserie</title>
+  <meta name="description" content="玥見創辦人 Yuet 在巴黎習藝七年，以法式精工融合台灣風土食材，打造獨一無二的甜點哲學。"/>
+  <link rel="icon" href="logos/yueijian-logo.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Serif+TC:wght@300;400;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/design.css"/>
+  <style>
+    /* ── PARALLAX HERO ── */
+    .about-hero {
+      height: 100svh;
+      min-height: 580px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--c-choco);
+    }
+    .about-hero-bg {
+      position: absolute;
+      inset: -10%;
+      background-image: url('https://images.unsplash.com/photo-1621955964441-c173e01c135b?w=1800&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.35;
+      transform: scale(1.1);
+      will-change: transform;
+    }
+    .about-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(44,24,16,0.4) 0%, rgba(44,24,16,0.2) 40%, rgba(44,24,16,0.75) 100%);
+    }
+    .about-hero-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 8vw;
+      margin-top: var(--nav-h);
+    }
+    .about-hero-text .section-label { color: var(--c-gold); }
+    .about-hero-text .section-title {
+      color: var(--c-cream);
+      font-size: clamp(48px, 8vw, 110px);
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+    .about-hero-sub {
+      font-family: var(--ff-en);
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(250,246,240,0.7);
+    }
+
+    /* ── FOUNDER ── */
+    #founder {
+      padding: 120px 8vw;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+    .founder-img {
+      position: relative;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .founder-img img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-out);
+    }
+    .founder-img:hover img { transform: scale(1.03); }
+    .founder-img-label {
+      position: absolute;
+      bottom: 28px;
+      left: 28px;
+      background: rgba(44,24,16,0.85);
+      backdrop-filter: blur(8px);
+      padding: 14px 20px;
+      border-left: 2px solid var(--c-gold);
+    }
+    .founder-img-label strong {
+      font-family: var(--ff-cn);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--c-cream);
+      display: block;
+    }
+    .founder-img-label span {
+      font-family: var(--ff-en);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-gold);
+    }
+    .founder-text blockquote {
+      font-family: var(--ff-en);
+      font-size: clamp(18px, 2vw, 26px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--c-choco);
+      border-left: 2px solid var(--c-gold);
+      padding-left: 24px;
+      line-height: 1.6;
+      margin: 28px 0;
+    }
+
+    /* ── PHILOSOPHY PILLARS ── */
+    #philosophy {
+      background: var(--c-ivory);
+      padding: 100px 8vw;
+    }
+    .philosophy-inner { max-width: 1400px; margin: 0 auto; }
+    .philosophy-header { text-align: center; margin-bottom: 64px; }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .pillar-card {
+      background: var(--c-white);
+      padding: 48px 36px;
+      border-radius: 2px;
+      text-align: center;
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s;
+    }
+    .pillar-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 56px rgba(44,24,16,0.1);
+    }
+    .pillar-icon {
+      width: 64px;
+      height: 64px;
+      border: 1px solid var(--c-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      color: var(--c-gold);
+      font-family: var(--ff-en);
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+    }
+    .pillar-title {
+      font-family: var(--ff-cn);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--c-choco);
+      margin-bottom: 12px;
+    }
+    .pillar-en {
+      font-family: var(--ff-en);
+      font-size: 11px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--c-gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .pillar-text {
+      font-size: 14px;
+      color: var(--c-warm);
+      line-height: 1.8;
+    }
+
+    /* ── CHEF TEAM ── */
+    #team {
+      padding: 100px 8vw;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .team-header { margin-bottom: 56px; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    .chef-card { text-align: left; }
+    .chef-img {
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .chef-img img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      filter: grayscale(20%);
+      transition: transform 0.6s var(--ease-out), filter 0.4s;
+    }
+    .chef-card:hover .chef-img img { transform: scale(1.04); filter: grayscale(0%); }
+    .chef-role {
+      font-family: var(--ff-en);
+      font-size: 11px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--c-gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .chef-name {
+      font-family: var(--ff-cn);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--c-choco);
+      margin-bottom: 6px;
+    }
+    .chef-name-en {
+      font-family: var(--ff-en);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--c-warm);
+      margin-bottom: 12px;
+    }
+    .chef-bio {
+      font-size: 13px;
+      color: var(--c-warm);
+      line-height: 1.8;
+    }
+
+    /* ── ATELIER ── */
+    #atelier {
+      background: var(--c-choco);
+      padding: 100px 8vw;
+      position: relative;
+      overflow: hidden;
+    }
+    #atelier::before {
+      content: 'Atelier';
+      position: absolute;
+      right: 5vw; top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--ff-en);
+      font-size: clamp(80px,14vw,180px);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(201,169,110,0.06);
+      pointer-events: none;
+    }
+    .atelier-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .atelier-img { border-radius: 2px; overflow: hidden; }
+    .atelier-img img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+    .atelier-text .section-label { color: var(--c-gold); }
+    .atelier-text .section-title { color: var(--c-cream); }
+    .atelier-text .section-body { color: rgba(250,246,240,0.65); margin-bottom: 20px; }
+    .atelier-workshops {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .workshop-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 16px 20px;
+      background: rgba(250,246,240,0.06);
+      border-radius: 2px;
+      border-left: 2px solid var(--c-gold);
+    }
+    .workshop-month {
+      font-family: var(--ff-en);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-gold);
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .workshop-info strong {
+      font-family: var(--ff-cn);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--c-cream);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .workshop-info span {
+      font-size: 12px;
+      color: rgba(250,246,240,0.55);
+    }
+
+    /* ── TIMELINE ── */
+    #timeline {
+      padding: 100px 8vw;
+      background: var(--c-ivory);
+    }
+    .timeline-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .timeline-header { text-align: center; margin-bottom: 64px; }
+    .timeline-track {
+      position: relative;
+      padding-left: 60px;
+    }
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 8px; bottom: 0;
+      width: 1px;
+      background: var(--c-light);
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 48px;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -45px;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      background: var(--c-gold);
+      border-radius: 50%;
+      border: 2px solid var(--c-ivory);
+      box-shadow: 0 0 0 1px var(--c-gold);
+    }
+    .tl-year {
+      font-family: var(--ff-en);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--c-gold);
+      margin-bottom: 6px;
+    }
+    .tl-title {
+      font-family: var(--ff-cn);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--c-choco);
+      margin-bottom: 8px;
+    }
+    .tl-desc {
+      font-size: 14px;
+      color: var(--c-warm);
+      line-height: 1.8;
+    }
+
+    /* ── CTA ── */
+    #about-cta {
+      padding: 100px 8vw;
+      text-align: center;
+      background: var(--c-choco);
+    }
+    #about-cta .section-label { color: var(--c-gold); }
+    #about-cta .section-title { color: var(--c-cream); }
+    .about-cta-sub {
+      font-family: var(--ff-en);
+      font-size: 16px;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(250,246,240,0.6);
+      margin-bottom: 40px;
+    }
+    .about-cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 900px) {
+      #founder { grid-template-columns: 1fr; gap: 56px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .atelier-inner { grid-template-columns: 1fr; }
+      .atelier-img { display: none; }
+    }
+    @media (max-width: 600px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav" role="navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logos/yueijian-logo-white.svg" alt="玥見法式甜點"/>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html"   class="nav-link">首頁</a></li>
+      <li><a href="menu.html"    class="nav-link">甜點菜單</a></li>
+      <li><a href="about.html"   class="nav-link">品牌故事</a></li>
+      <li><a href="reserve.html" class="nav-link">預約訂位</a></li>
+      <a href="reserve.html" class="nav-cta">立即預約</a>
+    </ul>
+    <button class="nav-hamburger" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="about-hero" id="aboutHero">
+  <div class="about-hero-bg" id="heroBg"></div>
+  <div class="about-hero-text">
+    <p class="section-label">Notre Histoire</p>
+    <h1 class="section-title">關於玥見</h1>
+    <p class="about-hero-sub">A story of obsession, craft, and the pursuit of beautiful things.</p>
+  </div>
+</header>
+
+<!-- ── FOUNDER ── -->
+<section>
+  <div id="founder">
+    <div class="founder-img reveal">
+      <img
+        src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=900&q=80"
+        alt="創辦人 Yuet 在廚房中"
+        loading="lazy"
+      />
+      <div class="founder-img-label">
+        <strong>Yuet · 陳玥瑄</strong>
+        <span>Founder & Head Pastry Chef</span>
+      </div>
+    </div>
+    <div class="founder-text">
+      <p class="section-label reveal">La Fondatrice</p>
+      <h2 class="section-title reveal reveal-delay-1">七年巴黎<br/>一生的執念</h2>
+      <div class="gold-rule reveal reveal-delay-1"></div>
+      <blockquote class="reveal reveal-delay-2">
+        "In Paris, I learned that perfection<br/>is not a destination — it is a practice."
+      </blockquote>
+      <p class="section-body reveal reveal-delay-2">
+        Yuet 在台灣長大，從小對廚房有著說不清楚的迷戀。
+        十八歲那年，她揣著對甜點的痴迷，隻身飛往巴黎，
+        進入 Le Cordon Bleu 學習法式甜點工藝。
+      </p>
+      <p class="section-body reveal reveal-delay-3">
+        七年間，她走訪法國、義大利、日本的甜點工坊，
+        在大師的廚房裡磨礪技術，記錄每一個讓她震撼的味道。
+        2018年，她帶著這些積累回到台北，
+        以法式精工詮釋台灣的風土滋味，創立了玥見。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHILOSOPHY ── -->
+<section id="philosophy">
+  <div class="philosophy-inner">
+    <div class="philosophy-header">
+      <p class="section-label reveal">Philosophie</p>
+      <h2 class="section-title reveal reveal-delay-1">三個選擇，一個承諾</h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card reveal">
+        <div class="pillar-icon">I</div>
+        <h3 class="pillar-title">精準工藝</h3>
+        <span class="pillar-en">Précision Artisanale</span>
+        <p class="pillar-text">
+          麵糊的溫度、打發的時機、糖漿的濃度——
+          每一個細節都有精準的數字依據。
+          我們相信，藝術不排斥科學；真正的美，來自對精準的偏執。
+        </p>
+      </div>
+      <div class="pillar-card reveal reveal-delay-1">
+        <div class="pillar-icon">II</div>
+        <h3 class="pillar-title">風土食材</h3>
+        <span class="pillar-en">Terroir Taïwanais</span>
+        <p class="pillar-text">
+          我們選用台灣在地農家的烏龍茶、荔枝、玫瑰與鳳梨，
+          以法式技法轉譯台灣的土地滋味。
+          每一季的菜單，都是一封寫給台灣的情書。
+        </p>
+      </div>
+      <div class="pillar-card reveal reveal-delay-2">
+        <div class="pillar-icon">III</div>
+        <h3 class="pillar-title">手工溫度</h3>
+        <span class="pillar-en">Chaleur Artisanale</span>
+        <p class="pillar-text">
+          玥見不使用任何半成品或預拌粉。
+          徝麵團、奶霜到裝飾，每一件甜點都在開放式廚房中透明製作。
+          因為我們相信，手的溫度，是機器永遠無法複製的。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TEAM ── -->
+<section>
+  <div id="team">
+    <div class="team-header">
+      <p class="section-label reveal">L'Équipe</p>
+      <h2 class="section-title reveal reveal-delay-1">我們的甜點師</h2>
+    </div>
+    <div class="team-grid">
+      <div class="chef-card reveal">
+        <div class="chef-img">
+          <img
+            src="https://images.unsplash.com/photo-1556217477-d325251ece38?w=600&q=80"
+            alt="主廚 Yuet"
+            loading="lazy"
+          />
+        </div>
+        <span class="chef-role">Fondatrice & Chef Pâtissière</span>
+        <p class="chef-name">陳玥瑄 Yuet</p>
+        <p class="chef-name-en">Le Cordon Bleu Paris · 2011-2018</p>
+        <p class="chef-bio">
+          玥見的創辦人與靈魂人物。擅長將法式精工美學與台灣食材融合，
+          打造季節性限定系列甜點。每季親自規劃菜單，堅持不重複的創作精神。
+        </p>
+      </div>
+      <div class="chef-card reveal reveal-delay-1">
+        <div class="chef-img">
+          <img
+            src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&q=80"
+            alt="副主廚 Marcus"
+            loading="lazy"
+          />
+        </div>
+        <span class="chef-role">Sous Chef Pâtissier</span>
+        <p class="chef-name">Luc Beaumont</p>
+        <p class="chef-name-en">École Ferrandi Paris · 2015</p>
+        <p class="chef-bio">
+          來自里昂的法籍甜點師，專精於巧克力工藝與糖飾裝飾藝術。
+          2020 年加入玥見，負責客製蛋糕系列與節慶禮盒設計。
+        </p>
+      </div>
+      <div class="chef-card reveal reveal-delay-2">
+        <div class="chef-img">
+          <img
+            src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80"
+            alt="甜點師 Mei"
+            loading="lazy"
+          />
+        </div>
+        <span class="chef-role">Pâtissière · Viennoiserie</span>
+        <p class="chef-name">林品萱 Mei</p>
+        <p class="chef-name-en">輔仁大學 餐飲管理 · 深造東京</p>
+        <p class="chef-bio">
+          台灣本地培訓，曾在東京甜點名店學習和菓子工藝。
+          負責每日泡芙、可頌與維也納麵包系列，
+          以台灣食材詮釋日法交融的甜點風味。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ATELIER ── -->
+<section id="atelier">
+  <div class="atelier-inner">
+    <div class="atelier-img reveal">
+      <img
+        src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=900&q=80"
+        alt="玥見甜點工作坊"
+        loading="lazy"
+      />
+    </div>
+    <div class="atelier-text">
+      <p class="section-label reveal">Atelier</p>
+      <h2 class="section-title reveal reveal-delay-1">甜點工作坊<br/>每月限額開班</h2>
+      <div class="gold-rule reveal reveal-delay-1"></div>
+      <p class="section-body reveal reveal-delay-2">
+        玥見每月舉辦精品甜點工作坊，由主廚親授法式甜點技巧。
+        小班制，最多八人，在開放式廚房中進行，
+        體驗職業甜點師的完整工作流程。
+      </p>
+      <div class="atelier-workshops reveal reveal-delay-3">
+        <div class="workshop-item">
+          <span class="workshop-month">July</span>
+          <div class="workshop-info">
+            <strong>法式塔派入門班</strong>
+            <span>4 小時 · NT$ 3,200 · 含材料費與成品帶回</span>
+          </div>
+        </div>
+        <div class="workshop-item">
+          <span class="workshop-month">Aug</span>
+          <div class="workshop-info">
+            <strong>千層蛋糕進階班</strong>
+            <span>6 小時 · NT$ 4,800 · 限 6 人 · 快速額滿</span>
+          </div>
+        </div>
+        <div class="workshop-item">
+          <span class="workshop-month">Sep</span>
+          <div class="workshop-info">
+            <strong>馬卡龍工作坊</strong>
+            <span>3 小時 · NT$ 2,600 · 帶回 24 顆馬卡龍</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 36px;" class="reveal reveal-delay-3">
+        <a href="reserve.html#custom" class="btn-gold">預約工作坊</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TIMELINE ── -->
+<section id="timeline">
+  <div class="timeline-inner">
+    <div class="timeline-header">
+      <p class="section-label reveal">Milestones</p>
+      <h2 class="section-title reveal reveal-delay-1">玥見的足跡</h2>
+    </div>
+    <div class="timeline-track">
+      <div class="tl-item reveal">
+        <p class="tl-year">2011 — 2018</p>
+        <p class="tl-title">巴黎習藝</p>
+        <p class="tl-desc">創辦人 Yuet 負笈巴黎，就讀 Le Cordon Bleu，並在多家米其林餐廳甜點部門實習，深耕法式甜點工藝。</p>
+      </div>
+      <div class="tl-item reveal reveal-delay-1">
+        <p class="tl-year">2018</p>
+        <p class="tl-title">玥見創立</p>
+        <p class="tl-desc">返台後在台北信義區開設玥見，首季推出 12 件法台融合甜點，在社群引發熱烈迴響，第一個月即完售。</p>
+      </div>
+      <div class="tl-item reveal reveal-delay-2">
+        <p class="tl-year">2020</p>
+        <p class="tl-title">法籍副主廚加入</p>
+        <p class="tl-desc">里昂甜點師 Luc Beaumont 加入玥見，帶來巧克力工藝與糖飾技術，客製蛋糕系列正式推出。</p>
+      </div>
+      <div class="tl-item reveal reveal-delay-3">
+        <p class="tl-year">2022</p>
+        <p class="tl-title">首屆法式甜點工作坊</p>
+        <p class="tl-desc">推出每月工作坊課程，首期 48 個名額在兩小時內秒殺。成為台北頂尖甜點教學體驗的代名詞。</p>
+      </div>
+      <div class="tl-item reveal">
+        <p class="tl-year">2024</p>
+        <p class="tl-title">台灣風土系列發表</p>
+        <p class="tl-desc">與台灣各地農家合作，推出「風土系列」，以烏龍、荔枝、鳳梨、玫瑰等台灣食材為主軸，獲國際美食媒體報導。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="about-cta">
+  <p class="section-label reveal">Réservation</p>
+  <h2 class="section-title reveal reveal-delay-1">每一次相遇<br/>都是一場難忘的儀式</h2>
+  <p class="about-cta-sub reveal reveal-delay-2">"Every visit is a quiet celebration."</p>
+  <div class="about-cta-actions reveal reveal-delay-3">
+    <a href="reserve.html" class="btn-gold">預約訂位</a>
+    <a href="menu.html" class="btn-outline" style="border-color:rgba(245,240,232,0.35);color:var(--c-cream)">探索菜單</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="logos/yueijian-logo-white.svg" alt="玥見法式甜點"/>
+      <p>法式工藝，台灣風土。<br/>每一口，都是與美的邂逅。<br/>Une rencontre avec le beau.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <a href="menu.html">所有甜點</a>
+      <a href="menu.html#tarts">塔派系列</a>
+      <a href="menu.html#cakes">蛋糕系列</a>
+      <a href="menu.html#gift">禮盒系列</a>
+    </div>
+    <div class="footer-col">
+      <h4>Brand</h4>
+      <a href="about.html">品牌故事</a>
+      <a href="about.html#team">主廚介紹</a>
+      <a href="about.html#atelier">工作坊</a>
+    </div>
+    <div class="footer-col">
+      <h4>Visit</h4>
+      <a href="reserve.html">預約訂位</a>
+      <a href="reserve.html#custom">客製蛋糕</a>
+      <a href="reserve.html#contact">聯絡我們</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 玥見法式甜點 Yueijian Patisserie. All rights reserved.</span>
+    <span>台北市信義區忠孝東路五段</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// Parallax
+const heroBg = document.getElementById('heroBg');
+if (heroBg) {
+  window.addEventListener('scroll', () => {
+    heroBg.style.transform = `scale(1.1) translateY(${window.scrollY * 0.25}px)`;
+  }, { passive: true });
+}
+</script>
+</body>
+</html>
