@@ -55,9 +55,15 @@
       transition: background 0.4s var(--ease-out), box-shadow 0.4s;
     }
     .site-nav.scrolled {
-      background: var(--c-choco);
-      box-shadow: 0 1px 24px rgba(0,0,0,0.25);
+      background: rgba(250,246,240,0.96);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.08);
     }
+    .site-nav.scrolled .nav-link { color: #3a2a20; }
+    .site-nav.scrolled .nav-link:hover,
+    .site-nav.scrolled .nav-link.active { color: #b08d57; }
+    .site-nav.scrolled .nav-cta { background: #b08d57; color: #fff; border-color: #b08d57; }
     .nav-inner {
       width: 100%;
       max-width: 1280px;
@@ -1328,7 +1334,7 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <p class="footer-brand-name">玥見法式甜點</p>
+          <img src="logos/yueijian-logo-white.svg" alt="玥見法式甜點" style="height:42px;width:auto;display:block;margin-bottom:14px;"/>
           <p class="footer-brand-tagline">Pâtisserie Française Yueijian</p>
           <div class="footer-rule"></div>
           <p class="footer-brand-desc">以法式精神與台灣土地的溫度，<br />創作每一件值得被記住的甜點。</p>
