@@ -22,7 +22,11 @@
     }
     .hero-bg {
       position: absolute;
-      inset: 0;
+      /* 上下各留 15% 緩衝(非 inset:0):捲動視差往下位移時頂部不會露出空白 */
+      left: 0;
+      right: 0;
+      top: -15%;
+      height: 130%;
       background-image: url('images/hero-bg.webp');
       background-size: cover;
       background-position: center 30%;
@@ -730,6 +734,36 @@
           <p class="sweet-price">NT$ 180</p>
         </div>
       </div>
+      <div class="sweet-card reveal reveal-delay-1">
+        <div class="sweet-img">
+          <img
+            src="images/matcha-cake.webp"
+            alt="宇治抹茶蛋糕"
+            loading="lazy"
+          />
+        </div>
+        <div class="sweet-info">
+          <span class="sweet-tag">Signature · 招牌系列</span>
+          <p class="sweet-name">宇治抹茶生乳捲</p>
+          <p class="sweet-name-en">Uji Matcha Roll</p>
+          <p class="sweet-price">NT$ 300</p>
+        </div>
+      </div>
+      <div class="sweet-card reveal reveal-delay-2">
+        <div class="sweet-img">
+          <img
+            src="images/strawberry-tart.webp"
+            alt="季節草莓塔"
+            loading="lazy"
+          />
+        </div>
+        <div class="sweet-info">
+          <span class="sweet-tag">Seasonal · 季節限定</span>
+          <p class="sweet-name">季節鮮草莓塔</p>
+          <p class="sweet-name-en">Seasonal Strawberry Tart</p>
+          <p class="sweet-price">NT$ 260</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -810,6 +844,17 @@
         <p class="exp-desc">每月精選主題課程，由主廚親授法式甜點技巧</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="cta">
+  <p class="section-label reveal">Reserve Your Moment</p>
+  <h2 class="section-title reveal reveal-delay-1">為你的時刻，留一席甜美</h2>
+  <p class="cta-sub reveal reveal-delay-1">Every moment deserves a little sweetness.</p>
+  <div class="cta-actions reveal reveal-delay-2">
+    <a href="reserve.html" class="btn-gold">立即預約訂位</a>
+    <a href="menu.html" class="btn-outline" style="border-color:rgba(201,169,110,0.5);color:var(--c-cream)">瀏覽甜點菜單</a>
   </div>
 </section>
 
