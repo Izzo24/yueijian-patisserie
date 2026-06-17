@@ -22,11 +22,8 @@
     }
     .hero-bg {
       position: absolute;
-      /* 上下各留 15% 緩衝(非 inset:0):捲動視差往下位移時頂部不會露出空白 */
-      left: 0;
-      right: 0;
-      top: -15%;
-      height: 130%;
+      /* inset:0 完整貼齊 hero,scrollY=0 時頂部就滿版,無斷層 */
+      inset: 0;
       background-image: url('images/hero-bg.webp');
       background-size: cover;
       background-position: center 30%;
@@ -34,7 +31,7 @@
       transform: scale(1.08);
       transition: transform 8s ease-out;
     }
-    .hero-bg.loaded { transform: scale(1.03); }
+    .hero-bg.loaded { transform: scale(1.12); }
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -934,11 +931,13 @@ window.addEventListener('load', () => {
   document.getElementById('heroBg')?.classList.add('loaded');
 });
 
-// Parallax on scroll
+// Parallax on scroll —— scale 1.12 提供緩衝,位移範圍才不會露出頂部空白。
+// 僅在 hero 可視範圍(0~視窗高)內位移,離開後停住。
 const heroBg = document.getElementById('heroBg');
 if (heroBg) {
   window.addEventListener('scroll', () => {
-    heroBg.style.transform = `scale(1.03) translateY(${window.scrollY * 0.2}px)`;
+    const y = Math.min(window.scrollY, window.innerHeight);
+    heroBg.style.transform = `scale(1.12) translateY(${y * 0.12}px)`;
   }, { passive: true });
 }
 </script>
