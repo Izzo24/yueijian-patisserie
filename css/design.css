@@ -145,6 +145,9 @@ button { cursor: pointer; font-family: inherit; }
   justify-content: space-between;
 }
 .nav-logo img { height: 40px; width: auto; }
+.nav-logo .logo-dark { display: none; }
+.site-nav.scrolled .nav-logo .logo-light { display: none; }
+.site-nav.scrolled .nav-logo .logo-dark { display: inline-block; }
 .nav-links {
   display: flex;
   list-style: none;
